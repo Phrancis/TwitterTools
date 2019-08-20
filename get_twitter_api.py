@@ -31,7 +31,18 @@ def get_twitter_api(file_path: str = 'app_data/twitter_api_keys.json') -> API:
         compression=True)
 
 
+def get_current_user_json_field(field_name: str) -> object:
+    """
+    Queries the current API user's JSON data (protected member, sorry no public access method provided by tweepy) to find the value of a field.
+    Return type varies depending on which field is queried, most often will be str or int.
+    API reference: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object.html
+    :param field_name: Name of the JSON field
+    :return: Value of the JSON field
+    """
+    return api.me()._json[field_name]
+
+
 if __name__ == '__main__':
     api: API = get_twitter_api()
     # Query the API for self data to make sure it's working
-    print(f'Current API user: {api.me()._json["screen_name"]}')
+    print(f'Current API user: {get_current_user_json_field("screen_name")}')
