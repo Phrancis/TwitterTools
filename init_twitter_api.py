@@ -1,5 +1,5 @@
 import json
-from typing import Dict
+from typing import Dict, TextIO
 
 
 def initialize_api() -> None:
@@ -21,13 +21,14 @@ def initialize_api() -> None:
     access_secret: str = input('Enter Access token secret: ').strip()
 
     # Write values to file
-    with open('app_data/twitter_api_keys.json', 'w') as f:
+    _file: TextIO
+    with open('app_data/twitter_api_keys.json', 'w') as _file:
         data: Dict = dict(
             api_key=api_key,
             api_secret=api_secret,
             access_token=access_token,
             access_secret=access_secret)
-        json.dump(data, f)
+        json.dump(data, _file)
     print('Twitter API data saved locally.')
 
 

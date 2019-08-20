@@ -1,20 +1,22 @@
 import json
-from typing import Dict
+from typing import Dict, TextIO
 from tweepy import API
 from tweepy import OAuthHandler
 
 
 def get_twitter_api(file_path: str = 'app_data/twitter_api_keys.json') -> API:
     """
-    Authenticates Twitter API using stored values, and returns an API instance ready for use.
+    Authenticates Twitter API using stored values, and returns an API instance.
     :return: A Twitter API instance from tweepy.
     """
     try:
-        with open(file_path, 'r') as f:
-            keys: Dict = json.load(f)
-    except FileNotFoundError as err:
-        print('File not found. Run "init_twitter_api.py" first.')
-        raise err
+        _file: TextIO
+        with open(file_path, 'r') as _file:
+            keys: Dict = json.load(_file)
+    except FileNotFoundError as _err:
+        print(f'File not found: {file_path}')
+        print('Run "init_twitter_api.py" first, or verify the file path.')
+        raise _err
 
     auth: OAuthHandler = OAuthHandler(keys['api_key'], keys['api_secret'])
     auth.set_access_token(keys['access_token'], keys['access_secret'])
