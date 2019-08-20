@@ -3,6 +3,10 @@ from typing import Dict
 
 
 def initialize_api() -> None:
+    """
+    Queries the user for the API keys & tokens, and saves them to a local JSON file.
+    :return: None
+    """
     print('Initializing Twitter API.')
     print('1: Go to https://developer.twitter.com/en/apps')
     print('2: Log in with your Twitter Developer account. If you don\'t have one, you\'ll have to request one first')
