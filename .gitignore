@@ -1,7 +1,8 @@
 # Files specific to this application TwitterTools
-.idea/
-twitter_api_keys.json
+app_data/
 
+# IDE project files
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
