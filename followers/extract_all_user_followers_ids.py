@@ -9,7 +9,7 @@ from api import get_twitter_api as api
 PATH_TO_APP_DATA = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app_data')
 
 
-def extract_all_follower_user_ids(screen_name: str = '') -> None:
+def extract_all_user_followers_ids(screen_name: str = '') -> None:
     """
     Get all of an account's followers' user IDs and write them to a JSON file with today's date.
     :param screen_name: The screen name of the account to query. If left blank, will use the API user's screen name.
@@ -32,4 +32,4 @@ def extract_all_follower_user_ids(screen_name: str = '') -> None:
 
 
 if __name__ == '__main__':
-    extract_all_follower_user_ids()
+    extract_all_user_followers_ids()
