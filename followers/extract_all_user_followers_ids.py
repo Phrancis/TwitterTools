@@ -43,10 +43,19 @@ if __name__ == '__main__':
     # Just in case they don't read instructions ;-)
     _screen_name = _screen_name.replace('@', '')
 
+    _api = api.get_twitter_api(os.path.join(PATH_TO_APP_DATA, 'twitter_api_keys.json'))
+    if _screen_name == '' or not _screen_name:
+        _screen_name = _api.me()._json['screen_name']
+    _target_user = _api.get_user(screen_name=_screen_name)
+    _target_followers_count: int = _target_user._json['followers_count']
+    print(f'{datetime.datetime.now()} Target user\'s followers count: {_target_followers_count}')
+    print(f'{datetime.datetime.now()} Guesstimated query time: {_target_followers_count / 5000} seconds')
+    print(f'{datetime.datetime.now()} Make sure your computer doesn\'t go to sleep mode or shut down during this time.')
+
     output_file_path: str = extract_all_user_followers_ids(_screen_name)
-    print(f'Results saved to file: {output_file_path}')
+    print(f'{datetime.datetime.now()} Results saved to file: {output_file_path}')
     followers_count: int = 0
     with open(output_file_path, 'r') as file:
         for line in file.read().splitlines():
             followers_count += 1
-    print(f'Follower IDs saved: {followers_count}')
+    print(f'{datetime.datetime.now()} Follower IDs saved: {followers_count}')
