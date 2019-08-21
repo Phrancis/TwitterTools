@@ -23,9 +23,9 @@ def extract_all_user_followers_ids(screen_name: str) -> str:
     _output_file_path = os.path.join(PATH_TO_APP_DATA, _output_file_name)
     _followers_count: int = 0
     try:
-        for page in tweepy.Cursor(_api.followers_ids, screen_name=screen_name).pages():
-            _output_file: TextIO
-            with open(_output_file_path, 'w') as _output_file:
+        _output_file: TextIO
+        with open(_output_file_path, 'w') as _output_file:
+            for page in tweepy.Cursor(_api.followers_ids, screen_name=screen_name).pages():
                 for item in page:
                     _output_file.write(f'{item}\n')
         return _output_file_path
