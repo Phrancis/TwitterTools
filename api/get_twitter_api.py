@@ -1,17 +1,23 @@
 import json
+import os
 from typing import Dict, TextIO
 from tweepy import API
 from tweepy import OAuthHandler
 
+PATH_TO_APP_DATA = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app_data')
 
-def get_twitter_api(file_path: str = 'app_data/twitter_api_keys.json') -> API:
+
+def get_twitter_api(file_path: str = os.path.join(PATH_TO_APP_DATA, 'twitter_api_keys.json')) -> API:
     """
     Authenticates Twitter API using stored values, and returns an API instance.
+    :param file_path: The path to app_data/twitter_api_keys.json
     :return: A Twitter API instance from tweepy.
     """
     try:
         _file: TextIO
         _keys: Dict = dict()
+        print(os.path.dirname(__file__))
+        print(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app_data', 'twitter_api_keys.json'))
         with open(file_path, 'r') as _file:
             _keys = json.load(_file)
     except FileNotFoundError as _err:
@@ -39,10 +45,11 @@ def get_current_user_json_field(field_name: str) -> object:
     :param field_name: Name of the JSON field
     :return: Value of the JSON field
     """
-    return api.me()._json[field_name]
+    _api = get_twitter_api(os.path.join(PATH_TO_APP_DATA, 'twitter_api_keys.json'))
+    return _api.me()._json[field_name]
 
 
 if __name__ == '__main__':
-    api: API = get_twitter_api()
+    api: API = get_twitter_api(os.path.join('app_data', 'twitter_api_keys.json'))
     # Query the API for self data to make sure it's working
     print(f'Current API user: {get_current_user_json_field("screen_name")}')
