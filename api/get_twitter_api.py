@@ -50,4 +50,4 @@ def get_current_user_json_field(field_name: str) -> object:
 if __name__ == '__main__':
     api: API = get_twitter_api(os.path.join('app_data', 'twitter_api_keys.json'))
     # Query the API for self data to make sure it's working
-    print(f'Current API user: {get_current_user_json_field("screen_name")}')
+    print(f'Current API user: {get_current_user_json_field("_screen_name")}')
