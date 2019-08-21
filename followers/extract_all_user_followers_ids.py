@@ -36,7 +36,8 @@ def extract_all_user_followers_ids(screen_name: str) -> str:
 
 
 if __name__ == '__main__':
-    print('Enter user screen name you wish to extract followers\' IDs, then press Enter.')
+    print(f'{datetime.datetime.now()} Starting program...')
+    print('Enter user screen name you wish to extract followers\' IDs from, then press Enter.')
     print('Do not include @ symbol before screen name.')
     print('Leave blank to use your own screen name.')
     _screen_name: str = input('Screen name: ')
@@ -49,7 +50,7 @@ if __name__ == '__main__':
     _target_user = _api.get_user(screen_name=_screen_name)
     _target_followers_count: int = _target_user._json['followers_count']
     print(f'{datetime.datetime.now()} Target user\'s followers count: {_target_followers_count}')
-    print(f'{datetime.datetime.now()} Guesstimated query time: {_target_followers_count / 5000} seconds')
+    print(f'{datetime.datetime.now()} Guesstimated query time (factoring free API rate limits but not your recent usage, YMMV): {_target_followers_count / 5000} minutes.')
     print(f'{datetime.datetime.now()} Make sure your computer doesn\'t go to sleep mode or shut down during this time.')
 
     output_file_path: str = extract_all_user_followers_ids(_screen_name)
