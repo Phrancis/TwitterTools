@@ -16,8 +16,6 @@ def get_twitter_api(file_path: str = os.path.join(PATH_TO_APP_DATA, 'twitter_api
     try:
         _file: TextIO
         _keys: Dict = dict()
-        print(os.path.dirname(__file__))
-        print(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'app_data', 'twitter_api_keys.json'))
         with open(file_path, 'r') as _file:
             _keys = json.load(_file)
     except FileNotFoundError as _err:

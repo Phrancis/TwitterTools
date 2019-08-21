@@ -14,8 +14,7 @@ def extract_all_follower_user_ids(screen_name: str = '') -> None:
     _api = api.get_twitter_api(os.path.join(PATH_TO_APP_DATA, 'twitter_api_keys.json'))
     if screen_name == '':
         screen_name = api.get_current_user_json_field('screen_name')
-    _file_name = f'follower_user_ids {screen_name} {datetime.date.today()}'
-    print(_file_name)
+    _file_name = f'follower_user_ids {screen_name} {datetime.date.today()}.json'
 
 
 if __name__ == '__main__':
