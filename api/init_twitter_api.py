@@ -21,14 +21,14 @@ def initialize_api() -> None:
     access_secret: str = input('Enter Access token secret: ').strip()
 
     # Write values to file
-    _file: TextIO
-    with open('app_data/twitter_api_keys.json', 'w') as _file:
+    file: TextIO
+    with open('app_data/twitter_api_keys.json', 'w') as file:
         data: Dict = dict(
             api_key=api_key,
             api_secret=api_secret,
             access_token=access_token,
             access_secret=access_secret)
-        json.dump(data, _file)
+        json.dump(data, file)
     print('Twitter API data saved locally.')
 
 
