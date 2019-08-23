@@ -16,8 +16,14 @@ def hydrate_followers_from_ids(file_path: str) -> None:
     _followers_ids_list: List
     with open(file_path, 'r') as _followers_ids:
         _followers_ids_list = _followers_ids.read().splitlines()
-        for user_id in _followers_ids_list:
-            print(user_id)
+    # Iterate list to query API, 100 at a time
+    for _user_id_index in range(0, len(_followers_ids_list), 100):
+        _current_list = _followers_ids_list[_user_id_index:_user_id_index + 100]
+        # This is for testing only
+        for _item_index in range(0, len(_current_list)):
+            print(f'{_user_id_index + _item_index} : {_followers_ids_list[_item_index]}')
+        print(f'Printed {len(_current_list)} items')
+    print(f'All Done. Total {len(_followers_ids_list)}')
 
 
 if __name__ == '__main__':
