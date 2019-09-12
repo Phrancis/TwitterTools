@@ -13,7 +13,7 @@ api = tweepy_api.get_twitter_api(os.path.join(PATH_TO_APP_DATA, 'twitter_api_key
 
 def extract_all_user_followers_ids(screen_name: str) -> str:
     """
-    Get all of an account's followers' user IDs and write them to a JSON file with today's date.
+    Get all of an account's followers' user IDs and write them to a text file with today's date in the file name.
     :param screen_name: The screen name of the account to query. If left blank, will use the API user's screen name.
     :return: The file path where the queried data was written.
     """
